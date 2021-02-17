@@ -5,7 +5,7 @@
 ############################ Settings ################################
 library_name="cppcoro-http"
 repo="https://github.com/Garcia6l20/cppcoro-http.git"
-branch="master"
+branch="feature/router-v2"
 ######################################################################
 
 echo "Installing ${library_name}"
