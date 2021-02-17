@@ -43,5 +43,6 @@ apt install -y \
 # Called by the Dockerfile when building the docker image.
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
+# order matters!
 ${this_dir}/tools/install_cmake.sh
 ${this_dir}/tools/install_gcc.sh
