@@ -1,5 +1,5 @@
 # The repository name for the image
-VARIANT="manulemeraz/flow"
+VARIANT="manuelmeraz/flow"
 
 # The current version of the image. Please edit this file and update the version
 TAG="0.0.2"

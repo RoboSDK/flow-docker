@@ -19,8 +19,8 @@ RUN mkdir -p /install_scripts
 # Copy the local install scripts to /install_scripts within the docker container
 COPY install_scripts/ /install_scripts/
 
-RUN /install_scripts/install_tools.sh
-RUN /install_scripts/install_libraries.sh
+RUN /install_scripts/install_tools.sh || exit 1
+RUN /install_scripts/install_libraries.sh || exit 1
 
 ################################# End ##############################
 

@@ -11,13 +11,17 @@ branch="master"
 echo "Installing ${name}"
 
 clone_dir="/tmp/${name}"
-git clone -b ${branch} ${repo} ${clone_dir}
+[[ ! -d ${clone_dir} ]] && git clone -b ${branch} ${repo} ${clone_dir}
 
 ##################### Modify This Code As Necessary ##################
-mkdir /tmp/gcc-build
+[[ ! -d /tmp/gcc-build ]] && mkdir /tmp/gcc-build
+
 cd /tmp/gcc-build
 /tmp/gcc/configure --disable-multilib
-make -j4 install
+make -j4
+make install
+
+rm -rf /tmp/gcc-build
 ######################################################################
 
 rm -rf ${clone_dir}

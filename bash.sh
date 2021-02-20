@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # read the default options
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-source "${DIR}/docker-options"
+this_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source "${this_dir}/docker-options"
 
-docker exec -it ${DOCKER_NAME} bash 
+docker exec -w ${this_dir}  -it ${DOCKER_NAME} bash 
+[[ ! $? -eq 0 ]] && docker exec -it ${DOCKER_NAME} bash

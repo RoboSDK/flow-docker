@@ -10,18 +10,8 @@
 
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
-install_library_scripts=$(ls ${this_dir}/libraries | grep install_)
+script_prefix="${this_dir}/libraries/install"
 
-for script in ${install_library_scripts}; do
-    ${this_dir}/libraries/${script}
-done
-
-cmake_config_files=$(ls ${this_dir}/libraries/cmake | grep Config.cmake)
-
-for config in ${cmake_config_files}; do
-    library_name=$(echo ${config} | awk -F Config.cmake '{print $1}')
-    config_dir="/usr/local/lib/cmake/${library_name}" 
-
-    [[ ! -d "${config_dir}" ]] && mkdir ${config_dir}
-    cp "${this_dir}/libraries/cmake/${config}" ${config_dir}
-done
+${script_prefix}_liburing.sh || exit 1
+${script_prefix}_cppcoro.sh || exit 1
+${script_prefix}_spdlog.sh || exit 1
