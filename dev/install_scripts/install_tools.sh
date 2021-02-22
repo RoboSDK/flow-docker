@@ -8,4 +8,3 @@ this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
 # order matters!
 ${this_dir}/tools/install_cmake.sh || exit 1
-${this_dir}/tools/install_gcc.sh || exit 1
