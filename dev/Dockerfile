@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM manuelmeraz/flow:base
 
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
@@ -7,9 +7,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER root
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-
-RUN apt update && apt upgrade -y
-RUN apt install -y sudo
 
 ################################# Start ##############################
 
@@ -20,7 +17,7 @@ RUN mkdir -p /install_scripts
 COPY install_scripts/ /install_scripts/
 
 RUN /install_scripts/install_tools.sh || exit 1
-RUN /install_scripts/install_libraries.sh || exit 1
+RUN /install_scripts/install_install_scripts.sh || exit 1
 
 ################################# End ##############################
 

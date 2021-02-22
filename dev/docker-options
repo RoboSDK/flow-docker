@@ -1,0 +1,9 @@
+# The repository name for the image
+VARIANT="manuelmeraz/flow"
+
+# The current version of the image. Please edit this file and update the version
+TAG="dev"
+
+# The name we will use for the container when it is running
+# e.g. docker ps will show the name as ms-docker
+DOCKER_NAME="flow-docker"

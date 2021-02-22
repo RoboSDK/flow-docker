@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 set -o nounset
+set -o errexit
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
-source "${DIR}/docker-options"
+image_dir=$1
+
+source "${image_dir}/docker-options"
 
 docker build \
     --network=host \
-    -t ${VARIANT}:${TAG} .
+    -t ${VARIANT}:${TAG} ${image_dir}

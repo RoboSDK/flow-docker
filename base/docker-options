@@ -2,7 +2,7 @@
 VARIANT="manuelmeraz/flow"
 
 # The current version of the image. Please edit this file and update the version
-TAG="0.0.2"
+TAG="base"
 
 # The name we will use for the container when it is running
 # e.g. docker ps will show the name as ms-docker
