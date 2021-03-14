@@ -10,9 +10,6 @@ ENV LC_ALL C.UTF-8
 
 ################################# Start ##############################
 
-# Make an install script directory in the root of the docker container
-RUN mkdir -p /install_scripts
-
 RUN apt update \
     && apt upgrade -y \
     && apt install -y \
@@ -37,8 +34,8 @@ RUN apt update \
     clang-format \
     clang-tools \
     gdb \
-    g++ \
-    gcc \
+    g++-10 \
+    gcc-10 \
     bash-completion \
     flex \
     libmpc-dev \
@@ -52,6 +49,16 @@ RUN apt update \
 
 RUN pip3 install conan || exit 1
 
+# Copy the install scripts to install tools
+COPY tools/ /tmp/tools
+
+RUN /tmp/tools/install_cmake.sh
+
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10
+
 ################################# End ##############################
+
+# clean up
+RUN rm -rf /tmp/tools
 
 ENTRYPOINT /bin/sh -c "while true; do sleep 10; done"

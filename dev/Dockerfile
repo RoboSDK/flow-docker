@@ -10,15 +10,21 @@ ENV LC_ALL C.UTF-8
 
 ################################# Start ##############################
 
-# Make an install script directory in the root of the docker container
-RUN mkdir -p /install_scripts
+# Copy the install scripts to install libraries
+COPY libraries/ /tmp/libraries
 
-# Copy the local install scripts to /install_scripts within the docker container
-COPY install_scripts/ /install_scripts/
+RUN /tmp/libraries/install_liburing.sh
+RUN /tmp/libraries/install_cppcoro.sh
+RUN /tmp/libraries/install_spdlog.sh
 
-RUN /install_scripts/install_tools.sh || exit 1
-RUN /install_scripts/install_libraries.sh || exit 1
-
+# Make sure flow builds and run tests
+WORKDIR tmp
+RUN git clone https://github.com/ManuelMeraz/flow.git
+RUN /tmp/flow/scripts/build.py --enable-testing
 ################################# End ##############################
+
+# clean up
+RUN rm -rf /tmp/flow
+RUN rm -rf /tmp/libraries
 
 ENTRYPOINT /bin/sh -c "while true; do sleep 10; done"

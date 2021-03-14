@@ -20,4 +20,4 @@ cd "/tmp/cmake-${version}"
 make -j4 install
 ######################################################################
 
-rm -rf "/tmp/cmake-${version}"
+rm -rf "/tmp/cmake-${version}*"
