@@ -44,17 +44,20 @@ RUN apt update \
     libmbedtls-dev \
     libssl-dev \
     time \
+    libxrender1 \
+    libxi6 \
+    libfreetype-dev \
+    libxtst6 \
+    x11-apps \
     && rm -rf /var/lib/apt/lists/* \
     || exit 1
 
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10 || exit 1
 RUN pip3 install conan || exit 1
 
 # Copy the install scripts to install tools
 COPY tools/ /tmp/tools
-
 RUN /tmp/tools/install_cmake.sh
-
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10
 
 ################################# End ##############################
 
