@@ -4,7 +4,7 @@
 
 ############################ Settings ################################
 name="cmake"
-version="3.19.4"
+version="3.24.2"
 url="https://github.com/Kitware/CMake/releases/download/v${version}/cmake-${version}.tar.gz"
 ######################################################################
 

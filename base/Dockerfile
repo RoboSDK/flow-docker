@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
@@ -34,8 +34,6 @@ RUN apt update \
     clang-format \
     clang-tools \
     gdb \
-    g++-10 \
-    gcc-10 \
     bash-completion \
     flex \
     libmpc-dev \
@@ -52,8 +50,6 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \
     || exit 1
 
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10 || exit 1
-RUN pip3 install conan || exit 1
 
 # Copy the install scripts to install tools
 COPY tools/ /tmp/tools
@@ -63,5 +59,3 @@ RUN /tmp/tools/install_cmake.sh
 
 # clean up
 RUN rm -rf /tmp/tools
-
-ENTRYPOINT /bin/sh -c "while true; do sleep 10; done"
